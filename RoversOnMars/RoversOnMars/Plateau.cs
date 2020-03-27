@@ -2,7 +2,7 @@
 
 namespace RoversOnMars
 {
-    public class Plateau
+    public class Plateau : IPlateau
     {
         private readonly int _maxX;
         private readonly int _maxY;
@@ -20,6 +20,11 @@ namespace RoversOnMars
 
             _maxX = maxX;
             _maxY = maxY;
+        }
+
+        public bool IsLocationOnPlateau(int x, int y)
+        {
+            return x < _maxX && y < _maxY;
         }
     }
 }

@@ -45,7 +45,11 @@ namespace RoversOnMars.Tests
             // assert
             if (x >= maxX || y >= maxY)
             {
-                Assert.NotNull(plateau);
+                Assert.True(result);
+            }
+            else
+            {
+                Assert.True(result);
             }
         }
 
