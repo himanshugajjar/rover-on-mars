@@ -1,19 +1,25 @@
-﻿namespace RoversOnMars
+﻿using System;
+
+namespace RoversOnMars
 {
     public class Rover : MarsRobot, IRobot
     {
+        private readonly IPlateau _plateau;
+
         public Location CurrentLocation { get; private set; }
 
         public int Id { get; set; }
 
-        public Rover()
+        public Rover(IPlateau plateau) : base(plateau)
         {
-            CurrentLocation = new Location(0, 0, 'N');
+            CurrentLocation = new Location(plateau.MinX, plateau.MinY, 'N');
         }
 
-        public Rover(Location location)
+        public Rover(Location location, IPlateau plateau) : base(plateau)
         {
             CurrentLocation = location;
+
+            _plateau = plateau;
         }
 
         public Location Move(string moveCommand)
@@ -22,23 +28,30 @@
 
             moveCommand = moveCommand.ToUpper();
 
-            foreach (var command in moveCommand)
+            try
             {
-                if (command == 'L')
+                foreach (var command in moveCommand)
                 {
-                    // turn 90 deg left
-                    location.Direction = TurnLeft(location.Direction);
+                    if (command == 'L')
+                    {
+                        // turn 90 deg left
+                        location.Orientation = TurnLeft(location.Orientation);
+                    }
+                    else if (command == 'R')
+                    {
+                        // turn 90 deg right
+                        location.Orientation = TurnRight(location.Orientation);
+                    }
+                    else if (command == 'M')
+                    {
+                        // Move forward
+                        location = MoveForward(location);
+                    }
                 }
-                else if (command == 'R')
-                {
-                    // turn 90 deg right
-                    location.Direction = TurnRight(location.Direction);
-                }
-                else if (command == 'M')
-                {
-                    // Move forward
-                    MoveForward(location);
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
 
             CurrentLocation = location;

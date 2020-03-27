@@ -6,7 +6,7 @@
 
         public int Y { get; set; }
 
-        public char Direction { get; set; }
+        public char Orientation { get; set; }
 
         private Location()
         { 
@@ -18,16 +18,16 @@
 
             Y = location.Y;
 
-            Direction = location.Direction;
+            Orientation = location.Orientation;
         }
 
-        public Location(int x, int y, char direction)
+        public Location(int x, int y, char orientation)
         {
             X = x;
             
             Y = y;
 
-            Direction = direction;
+            Orientation = orientation;
         }
     }
 }

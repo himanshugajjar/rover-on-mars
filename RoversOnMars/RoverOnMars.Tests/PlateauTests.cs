@@ -43,13 +43,13 @@ namespace RoversOnMars.Tests
             var result = plateau.IsLocationOnPlateau(x, y);
 
             // assert
-            if (x >= maxX || y >= maxY)
+            if (x >= maxX || y >= maxY || (x == 0 && y == 0))
             {
                 Assert.True(result);
             }
             else
             {
-                Assert.True(result);
+                Assert.False(result);
             }
         }
 

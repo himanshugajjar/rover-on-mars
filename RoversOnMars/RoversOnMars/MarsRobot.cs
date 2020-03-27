@@ -4,42 +4,62 @@ namespace RoversOnMars
 {
     public class MarsRobot : IMarsRobot
     {
-        public void MoveForward(Location locaiton)
+        private readonly IPlateau _plateau;
+
+        public MarsRobot(IPlateau plateau)
         {
-            switch(locaiton.Direction)
-            {
-                case 'N': locaiton.Y += 1;
-                    break;
-                case 'W': locaiton.X += 1;
-                    break;
-                case 'S': locaiton.Y -= 1;
-                    break;
-                case 'E': locaiton.X -= 1;
-                    break;
-            };
+            _plateau = plateau;
         }
 
-        public char TurnLeft(char currentDirection)
+        public Location MoveForward(Location location)
         {
-            return currentDirection switch
+            var newLocation = new Location(location);
+
+            switch(location.Orientation)
             {
-                'N' => 'E',
-                'E' => 'S',
-                'S' => 'W',
-                'W' => 'N',
-                _ => currentDirection,
+                case 'N':
+                    newLocation.Y += 1;
+                    break;
+                case 'E':
+                    newLocation.X += 1;
+                    break;
+                case 'S':
+                    newLocation.Y -= 1;
+                    break;
+                case 'W':
+                    newLocation.X -= 1;
+                    break;
             };
+
+            if (!_plateau.IsLocationOnPlateau(newLocation.X, newLocation.Y))
+            {
+                throw new InvalidOperationException($"Invalid Move : {nameof(Location.Orientation)} : {location.Orientation} ({newLocation.X}, {newLocation.Y})");
+            }
+
+            return newLocation;
         }
 
-        public char TurnRight(char currentDirection)
+        public char TurnLeft(char currentOrientation)
         {
-            return currentDirection switch
+            return currentOrientation switch
             {
                 'N' => 'W',
                 'W' => 'S',
                 'S' => 'E',
                 'E' => 'N',
-                _ => currentDirection,
+                _ => currentOrientation,
+            };
+        }
+
+        public char TurnRight(char currentOrientation)
+        {
+            return currentOrientation switch
+            {
+                'N' => 'E',
+                'E' => 'S',
+                'S' => 'W',
+                'W' => 'N',
+                _ => currentOrientation,
             };
         }
     }
