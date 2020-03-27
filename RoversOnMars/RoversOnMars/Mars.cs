@@ -7,9 +7,9 @@ namespace RoversOnMars
     {
         private readonly IPlateau _plateau;
 
-        private readonly IEnumerable<IMarsRobot> _robots;
+        private readonly IEnumerable<IRobot> _robots;
 
-        public Mars(IPlateau plateau, IEnumerable<IMarsRobot> robots)
+        public Mars(IPlateau plateau, IEnumerable<IRobot> robots)
         {
             _plateau = plateau;
             _robots = robots;

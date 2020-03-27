@@ -42,7 +42,7 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(0, location.Y);
 
-            Assert.Equal('W', location.Direction);
+            Assert.Equal('E', location.Direction);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(0, location.Y);
 
-            Assert.Equal('E', location.Direction);
+            Assert.Equal('W', location.Direction);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace RoversOnMars.Tests
         public void Rover_can_go_in_circle()
         {
             // arrange
-            var rover = new Rover();
+            var rover = new Rover(new Location(1, 1, 'N'));
 
             // action
             var location = rover.Move("LMLMLMLM");
@@ -95,7 +95,7 @@ namespace RoversOnMars.Tests
             // assert
             Assert.NotNull(location);
 
-            Assert.Equal(0, location.X);
+            Assert.Equal(1, location.X);
 
             Assert.Equal(1, location.Y);
 

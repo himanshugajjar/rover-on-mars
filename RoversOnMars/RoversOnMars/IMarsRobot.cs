@@ -2,8 +2,10 @@
 {
     public interface IMarsRobot
     {
-        Location CurrentLocation { get; }
+        char TurnLeft(char currentDirection);
 
-        Location Move(string moveCommand);
+        char TurnRight(char currentDirection);
+
+        void MoveForward(Location currentLocaiton);
     }
 }
