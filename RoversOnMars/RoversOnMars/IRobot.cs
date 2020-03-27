@@ -1,10 +1,12 @@
-﻿namespace RoversOnMars
+﻿using System;
+
+namespace RoversOnMars
 {
     public interface IRobot
     {
         Location CurrentLocation { get; }
 
-        int Id { get; set; }
+        Guid Id { get; }
 
         Location Move(string moveCommand);
     }

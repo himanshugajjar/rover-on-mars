@@ -8,15 +8,19 @@ namespace RoversOnMars
 
         public Location CurrentLocation { get; private set; }
 
-        public int Id { get; set; }
+        public Guid Id { get; private set; }
 
         public Rover(IPlateau plateau) : base(plateau)
         {
+            Id = Guid.NewGuid();
+            
             CurrentLocation = new Location(plateau.MinX, plateau.MinY, 'N');
         }
 
         public Rover(Location location, IPlateau plateau) : base(plateau)
         {
+            Id = Guid.NewGuid();
+
             CurrentLocation = location;
 
             _plateau = plateau;
@@ -51,7 +55,7 @@ namespace RoversOnMars
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine($"Error : robotId:[{Id}] - {ex.Message}");
             }
 
             CurrentLocation = location;
