@@ -122,5 +122,34 @@ namespace RoversOnMars.Tests
 
         }
 
+        [Fact]
+        public void Move_invalid_location_rover_on_Mars()
+        {
+            // arrange
+            var mars = new Mars(_plateau);
+
+            //assert
+            Assert.Throws<InvalidOperationException>(() => mars.DeployRovers(new List<Location> { new Location(1, 1000, 'N')}));
+
+        }
+
+        [Theory]
+        [InlineData(5, 5, 1, 2, 'N', "LMLMLMLMM", "1 3 N")]
+        [InlineData(5, 5, 3, 3, 'E', "MMRMMRMRRM", "5 1 E")]
+        public void Move_rover_on_Mars_acceptance_tests(int maxX, int maxY, int x, int y, char ori, string direction, string finalLocation)
+        {
+            // arrange
+            var mars = new Mars(new Plateau(maxX, maxY));
+
+            // action
+            var robotIds = mars.DeployRovers(new List<Location> { new Location(x, y, ori)}).ToList();
+
+            var result = mars.MoveRobot(robotIds.First(), direction);
+
+            //assert
+            Assert.Equal(finalLocation, result.ToString());
+
+        }
+
     }
 }

@@ -27,7 +27,7 @@ namespace RoversOnMars
 
         public bool IsLocationOnPlateau(int x, int y)
         {
-            return x < _maxX && y < _maxY && x >= MinX && y >= MinY;
+            return x <= _maxX && y <= _maxY && x >= MinX && y >= MinY;
         }
     }
 }

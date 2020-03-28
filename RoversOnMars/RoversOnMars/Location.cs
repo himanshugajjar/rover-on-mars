@@ -12,6 +12,11 @@
         { 
         }
 
+        public override string ToString()
+        {
+            return $"{X} {Y} {Orientation}";
+        }
+
         public Location (Location location)
         {
             X = location.X;

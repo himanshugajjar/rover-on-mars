@@ -11,11 +11,11 @@ namespace RoversOnMars
             _plateau = plateau;
         }
 
-        public Location MoveForward(Location location)
+        public Location MoveForward(Location lastLocation)
         {
-            var newLocation = new Location(location);
+            var newLocation = new Location(lastLocation);
 
-            switch(location.Orientation)
+            switch(lastLocation.Orientation)
             {
                 case 'N':
                     newLocation.Y += 1;
@@ -33,33 +33,33 @@ namespace RoversOnMars
 
             if (!_plateau.IsLocationOnPlateau(newLocation.X, newLocation.Y))
             {
-                throw new InvalidOperationException($"Invalid Move : {nameof(Location.Orientation)} : {location.Orientation} ({newLocation.X}, {newLocation.Y})");
+                throw new InvalidOperationException($"Invalid Move : {nameof(Location.Orientation)} : {lastLocation.Orientation} ({newLocation.X}, {newLocation.Y})");
             }
 
             return newLocation;
         }
 
-        public char TurnLeft(char currentOrientation)
+        public char TurnLeft(char orientation)
         {
-            return currentOrientation switch
+            return orientation switch
             {
                 'N' => 'W',
                 'W' => 'S',
                 'S' => 'E',
                 'E' => 'N',
-                _ => currentOrientation,
+                _ => throw new InvalidOperationException($"Invalid Orientation : {orientation}"),
             };
         }
 
-        public char TurnRight(char currentOrientation)
+        public char TurnRight(char orientation)
         {
-            return currentOrientation switch
+            return orientation switch
             {
                 'N' => 'E',
                 'E' => 'S',
                 'S' => 'W',
                 'W' => 'N',
-                _ => currentOrientation,
+                _ => throw new InvalidOperationException($"Invalid Orientation : {orientation}"),
             };
         }
     }

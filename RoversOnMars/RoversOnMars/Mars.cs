@@ -21,7 +21,14 @@ namespace RoversOnMars
 
             foreach (var loc in locations)
             {
-                _robots.Add(new Rover(loc, _plateau));
+                if (_plateau.IsLocationOnPlateau(loc.X, loc.Y))
+                {
+                    _robots.Add(new Rover(loc, _plateau));
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Unable to deploy this rover. Location is outside plateau range ({loc.X}, {loc.Y})");
+                }
             }
 
             return _robots.Select(x => x.Id);
