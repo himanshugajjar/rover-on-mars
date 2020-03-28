@@ -41,6 +41,8 @@ namespace RoversOnMars
                     var lastLocation = mars.MoveRobot(roverIds[i], directions[i]);
 
                     Console.WriteLine($"{lastLocation.X} {lastLocation.Y} {lastLocation.Orientation}");
+
+                    loctions[i] = lastLocation;
                 }
 
                 Console.WriteLine();

@@ -16,7 +16,7 @@ namespace RoversOnMars.Domain
 
         public Plateau(int maxX, int maxY)
         {
-            if (maxX < 0 || maxY < 0 || maxX == 0 && maxY == 0)
+            if (maxX < MinX || maxY < MinY || maxX == MinX && maxY == MinY)
             {
                 throw new InvalidOperationException($"Invalid upper right boudandaries : ({maxX}, {maxY})");
             }
