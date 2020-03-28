@@ -1,4 +1,7 @@
-﻿using Xunit;
+﻿using RoversOnMars.Domain;
+using RoversOnMars.Enums;
+using RoversOnMars.Models;
+using Xunit;
 
 namespace RoversOnMars.Tests
 {
@@ -27,7 +30,7 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(0, location.Y);
 
-            Assert.Equal('N', location.Orientation);
+            Assert.Equal(Orientation.N, location.Orientation);
         }
 
         [Fact]
@@ -46,7 +49,7 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(0, location.Y);
 
-            Assert.Equal('W', location.Orientation);
+            Assert.Equal(Orientation.W, location.Orientation);
         }
 
         [Fact]
@@ -65,7 +68,7 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(0, location.Y);
 
-            Assert.Equal('E', location.Orientation);
+            Assert.Equal(Orientation.E, location.Orientation);
         }
 
         [Fact]
@@ -84,14 +87,14 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(1, location.Y);
 
-            Assert.Equal('N', location.Orientation);
+            Assert.Equal(Orientation.N, location.Orientation);
         }
 
         [Fact]
         public void Rover_can_go_in_circle()
         {
             // arrange
-            var rover = new Rover(new Location(1, 1, 'N'), _plateau);
+            var rover = new Rover(new Location(1, 1, Orientation.N), _plateau);
 
             // action
             var location = rover.Move("LMLMLMLM");
@@ -103,14 +106,14 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(1, location.Y);
 
-            Assert.Equal('N', location.Orientation);
+            Assert.Equal(Orientation.N, location.Orientation);
         }
 
         [Fact]
         public void Rover_can_go_in_up()
         {
             // arrange
-            var rover = new Rover(new Location(1, 1, 'W'), _plateau);
+            var rover = new Rover(new Location(1, 1, Orientation.W), _plateau);
 
             // action
             var location = rover.Move("RMM");
@@ -122,14 +125,14 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(3, location.Y);
 
-            Assert.Equal('N', location.Orientation);
+            Assert.Equal(Orientation.N, location.Orientation);
         }
 
         [Fact]
         public void Rover_can_go_in_down()
         {
             // arrange
-            var rover = new Rover(new Location(2, 2, 'N'), _plateau);
+            var rover = new Rover(new Location(2, 2, Orientation.N), _plateau);
 
             // action
             var location = rover.Move("LLMM");
@@ -141,14 +144,14 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(0, location.Y);
 
-            Assert.Equal('S', location.Orientation);
+            Assert.Equal(Orientation.S, location.Orientation);
         }
 
         [Fact]
         public void Rover_can_go_left_forward()
         {
             // arrange
-            var rover = new Rover(new Location(2, 2, 'N'), _plateau);
+            var rover = new Rover(new Location(2, 2, Orientation.N), _plateau);
 
             // action
             var location = rover.Move("LMM");
@@ -160,14 +163,14 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(2, location.Y);
 
-            Assert.Equal('W', location.Orientation);
+            Assert.Equal(Orientation.W, location.Orientation);
         }
 
         [Fact]
         public void Rover_can_go_right_forward()
         {
             // arrange
-            var rover = new Rover(new Location(2, 2, 'N'), _plateau);
+            var rover = new Rover(new Location(2, 2, Orientation.N), _plateau);
 
             // action
             var location = rover.Move("RMM");
@@ -179,14 +182,14 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(2, location.Y);
 
-            Assert.Equal('E', location.Orientation);
+            Assert.Equal(Orientation.E, location.Orientation);
         }
 
         [Fact]
         public void Rover_can_not_go_outside()
         {
             // arrange
-            var rover = new Rover(new Location(2, 2, 'N'), _plateau);
+            var rover = new Rover(new Location(2, 2, Orientation.N), _plateau);
 
             // action
             var location = rover.Move("LLMMM");
@@ -198,7 +201,7 @@ namespace RoversOnMars.Tests
 
             Assert.Equal(0, location.Y);
 
-            Assert.Equal('S', location.Orientation);
+            Assert.Equal(Orientation.S, location.Orientation);
         }
 
     }

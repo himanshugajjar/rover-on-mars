@@ -1,4 +1,6 @@
-﻿namespace RoversOnMars
+﻿using RoversOnMars.Enums;
+
+namespace RoversOnMars.Models
 {
     public class Location
     {
@@ -6,10 +8,10 @@
 
         public int Y { get; set; }
 
-        public char Orientation { get; set; }
+        public Orientation Orientation { get; set; }
 
         private Location()
-        { 
+        {
         }
 
         public override string ToString()
@@ -17,7 +19,7 @@
             return $"{X} {Y} {Orientation}";
         }
 
-        public Location (Location location)
+        public Location(Location location)
         {
             X = location.X;
 
@@ -26,10 +28,10 @@
             Orientation = location.Orientation;
         }
 
-        public Location(int x, int y, char orientation)
+        public Location(int x, int y, Orientation orientation)
         {
             X = x;
-            
+
             Y = y;
 
             Orientation = orientation;

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using RoversOnMars.Enums;
+using RoversOnMars.Models;
+using System;
 
-namespace RoversOnMars
+namespace RoversOnMars.Domain
 {
     public class MarsRobot : IMarsRobot
     {
@@ -15,18 +17,18 @@ namespace RoversOnMars
         {
             var newLocation = new Location(lastLocation);
 
-            switch(lastLocation.Orientation)
+            switch (lastLocation.Orientation)
             {
-                case 'N':
+                case Orientation.N:
                     newLocation.Y += 1;
                     break;
-                case 'E':
+                case Orientation.E:
                     newLocation.X += 1;
                     break;
-                case 'S':
+                case Orientation.S:
                     newLocation.Y -= 1;
                     break;
-                case 'W':
+                case Orientation.W:
                     newLocation.X -= 1;
                     break;
             };
@@ -39,26 +41,26 @@ namespace RoversOnMars
             return newLocation;
         }
 
-        public char TurnLeft(char orientation)
+        public Orientation TurnLeft(Orientation orientation)
         {
             return orientation switch
             {
-                'N' => 'W',
-                'W' => 'S',
-                'S' => 'E',
-                'E' => 'N',
+                Orientation.N => Orientation.W,
+                Orientation.W => Orientation.S,
+                Orientation.S => Orientation.E,
+                Orientation.E => Orientation.N,
                 _ => throw new InvalidOperationException($"Invalid Orientation : {orientation}"),
             };
         }
 
-        public char TurnRight(char orientation)
+        public Orientation TurnRight(Orientation orientation)
         {
             return orientation switch
             {
-                'N' => 'E',
-                'E' => 'S',
-                'S' => 'W',
-                'W' => 'N',
+                Orientation.N => Orientation.E,
+                Orientation.E => Orientation.S,
+                Orientation.S => Orientation.W,
+                Orientation.W => Orientation.N,
                 _ => throw new InvalidOperationException($"Invalid Orientation : {orientation}"),
             };
         }

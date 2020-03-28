@@ -1,6 +1,7 @@
-﻿using System;
+﻿using RoversOnMars.Models;
+using System;
 
-namespace RoversOnMars
+namespace RoversOnMars.Domain
 {
     public interface IRobot
     {

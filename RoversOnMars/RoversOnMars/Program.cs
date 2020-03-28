@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RoversOnMars.Domain;
+using RoversOnMars.Enums;
+using RoversOnMars.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,15 +33,24 @@ namespace RoversOnMars
                 var roverIds = mars.DeployRovers(loctions).ToList();
 
                 Console.WriteLine("Sending directions to Rovers...");
+                Console.WriteLine("Rovers' final locations...");
+                Console.WriteLine("--------------------------------------------------------------------------------------------------");
+                Console.WriteLine();
                 for (var i = 0; i < roverIds.Count; i++)
                 {
                     var lastLocation = mars.MoveRobot(roverIds[i], directions[i]);
 
                     Console.WriteLine($"{lastLocation.X} {lastLocation.Y} {lastLocation.Orientation}");
                 }
+
+                Console.WriteLine();
+                Console.WriteLine("--------------------------------------------------------------------------------------------------");
+                Console.WriteLine("Misson Orbiter Mars: Successfully Completed");
+                Console.WriteLine("--------------------------------------------------------------------------------------------------");
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"{ex.Message}");
                 Console.WriteLine("Failed to deploy rovers on Mars.");
                 Console.WriteLine("Misson Orbiter Mars: Failed");
             }
@@ -87,7 +99,7 @@ namespace RoversOnMars
 
                 var x = Convert.ToInt32(points[0]);
                 var y = Convert.ToInt32(points[1]);
-                var orientation = points[2].ToUpper()[0];
+                var orientation = (Orientation)Enum.Parse(typeof(Orientation), points[2].ToUpper());
 
                 return new Location(x, y, orientation);
 

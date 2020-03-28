@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RoversOnMars
+namespace RoversOnMars.Domain
 {
     public class Plateau : IPlateau
     {
@@ -18,7 +18,7 @@ namespace RoversOnMars
         {
             if (maxX < 0 || maxY < 0 || maxX == 0 && maxY == 0)
             {
-                throw new InvalidOperationException($"Invalid boudandaries upper right : ({maxX}, {maxY})");
+                throw new InvalidOperationException($"Invalid upper right boudandaries : ({maxX}, {maxY})");
             }
 
             _maxX = maxX;

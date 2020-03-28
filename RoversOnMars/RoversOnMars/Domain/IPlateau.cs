@@ -1,4 +1,4 @@
-﻿namespace RoversOnMars
+﻿namespace RoversOnMars.Domain
 {
     public interface IPlateau
     {

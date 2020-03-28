@@ -1,7 +1,9 @@
-﻿using System;
+﻿using RoversOnMars.Domain;
+using RoversOnMars.Enums;
+using RoversOnMars.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace RoversOnMars.Tests
@@ -16,18 +18,18 @@ namespace RoversOnMars.Tests
             _plateau = new Plateau(100, 100);
 
             _locations = new List<Location> {
-                new Location(1, 2, 'N'),
-                new Location(2, 2, 'E'),
-                new Location(3, 4, 'W'),
-                new Location(5, 2, 'S'),
-                new Location(1, 6, 'W'),
-                new Location(6, 2, 'E'),
-                new Location(6, 2, 'N'),
-                new Location(7, 2, 'N'),
-                new Location(1, 7, 'S'),
-                new Location(8, 8, 'N'),
-                new Location(1, 9, 'W'),
-                new Location(10, 10, 'N')
+                new Location(1, 2, Orientation.N),
+                new Location(2, 2, Orientation.E),
+                new Location(3, 4, Orientation.W),
+                new Location(5, 2, Orientation.S),
+                new Location(1, 6, Orientation.W),
+                new Location(6, 2, Orientation.E),
+                new Location(6, 2, Orientation.N),
+                new Location(7, 2, Orientation.N),
+                new Location(1, 7, Orientation.S),
+                new Location(8, 8, Orientation.N),
+                new Location(1, 9, Orientation.W),
+                new Location(10, 10, Orientation.N)
             };
         }
 
@@ -73,28 +75,28 @@ namespace RoversOnMars.Tests
 
                 switch (_locations[i].Orientation)
                 {
-                    case 'N':
+                    case Orientation.N:
                         {
                             Assert.Equal(_locations[i].X, results[i].X);
 
                             Assert.Equal(_locations[i].Y + 1, results[i].Y);
                         }
                         break;
-                    case 'E':
+                    case Orientation.E:
                         {
                             Assert.Equal(_locations[i].X + 1, results[i].X);
 
                             Assert.Equal(_locations[i].Y, results[i].Y);
                         }
                         break;
-                    case 'S':
+                    case Orientation.S:
                         {
                             Assert.Equal(_locations[i].X, results[i].X);
 
                             Assert.Equal(_locations[i].Y - 1, results[i].Y);
                         }
                         break;
-                    case 'W':
+                    case Orientation.W:
                         {
                             Assert.Equal(_locations[i].X - 1, results[i].X);
 
@@ -129,14 +131,14 @@ namespace RoversOnMars.Tests
             var mars = new Mars(_plateau);
 
             //assert
-            Assert.Throws<InvalidOperationException>(() => mars.DeployRovers(new List<Location> { new Location(1, 1000, 'N')}));
+            Assert.Throws<InvalidOperationException>(() => mars.DeployRovers(new List<Location> { new Location(1, 1000, Orientation.N)}));
 
         }
 
         [Theory]
-        [InlineData(5, 5, 1, 2, 'N', "LMLMLMLMM", "1 3 N")]
-        [InlineData(5, 5, 3, 3, 'E', "MMRMMRMRRM", "5 1 E")]
-        public void Move_rover_on_Mars_acceptance_tests(int maxX, int maxY, int x, int y, char ori, string direction, string finalLocation)
+        [InlineData(5, 5, 1, 2, Orientation.N, "LMLMLMLMM", "1 3 N")]
+        [InlineData(5, 5, 3, 3, Orientation.E, "MMRMMRMRRM", "5 1 E")]
+        public void Move_rover_on_Mars_acceptance_tests(int maxX, int maxY, int x, int y, Orientation ori, string direction, string finalLocation)
         {
             // arrange
             var mars = new Mars(new Plateau(maxX, maxY));

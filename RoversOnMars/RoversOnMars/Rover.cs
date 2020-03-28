@@ -1,11 +1,12 @@
-﻿using System;
+﻿using RoversOnMars.Domain;
+using RoversOnMars.Enums;
+using RoversOnMars.Models;
+using System;
 
 namespace RoversOnMars
 {
     public class Rover : MarsRobot, IRobot
     {
-        private readonly IPlateau _plateau;
-
         public Location CurrentLocation { get; private set; }
 
         public Guid Id { get; private set; }
@@ -14,7 +15,7 @@ namespace RoversOnMars
         {
             Id = Guid.NewGuid();
             
-            CurrentLocation = new Location(plateau.MinX, plateau.MinY, 'N');
+            CurrentLocation = new Location(plateau.MinX, plateau.MinY, Orientation.N);
         }
 
         public Rover(Location location, IPlateau plateau) : base(plateau)
@@ -22,8 +23,6 @@ namespace RoversOnMars
             Id = Guid.NewGuid();
 
             CurrentLocation = location;
-
-            _plateau = plateau;
         }
 
         public Location Move(string moveCommand)

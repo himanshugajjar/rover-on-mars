@@ -1,6 +1,6 @@
 using System;
 using Xunit;
-using RoversOnMars;
+using RoversOnMars.Domain;
 
 namespace RoversOnMars.Tests
 {
