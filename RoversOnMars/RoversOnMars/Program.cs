@@ -56,7 +56,6 @@ namespace RoversOnMars
                 Console.WriteLine("Failed to deploy rovers on Mars.");
                 Console.WriteLine("Misson Orbiter Mars: Failed");
             }
-
         }
 
         private static (List<Location>, List<string>) CollectRoverDetail()
